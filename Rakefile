@@ -21,6 +21,7 @@ spec = Gem::Specification.new do |s|
 
     s.require_path  =   "lib"
 end
+spec = eval(File.read('ticgit.gemspec'))
 
 Rake::GemPackageTask.new(spec) do |pkg|
     pkg.need_tar = true
