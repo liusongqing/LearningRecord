@@ -45,8 +45,6 @@ module TicGit
     end
 
     def execute!
-<<<<<<< HEAD
-<<<<<<< HEAD
       case action
       when 'list'
         handle_ticket_list
@@ -72,17 +70,10 @@ module TicGit
         handle_ticket_points
       else
         puts 'not a command'
-=======
-=======
->>>>>>> Outch, forgot something...
       COMMANDS.each do |name, meth|
         if name === action
           return send(meth)
         end
-<<<<<<< HEAD
->>>>>>> Clean up some code, give commands -h/--help
-=======
->>>>>>> Outch, forgot something...
       end
 
       puts 'not a command'
@@ -297,43 +288,28 @@ module TicGit
 
       if tickets = tic.ticket_list(options)
         counter = 0
-<<<<<<< HEAD
         cols = [80, window_cols].max
-      
-=======
-
->>>>>>> Get rid of trailing whitespace
         puts
         puts [' ', just('#', 4, 'r'),
               just('TicId', 6),
-<<<<<<< HEAD
               just('Title', cols - 56), 
-=======
               just('Title', 25),
->>>>>>> Get rid of trailing whitespace
               just('State', 5),
               just('Date', 5),
               just('Assgn', 8),
               just('Tags', 20) ].join(" ")
 
-<<<<<<< HEAD
         puts "-" * cols
-=======
         a = []
         80.times { a << '-'}
         puts a.join('')
->>>>>>> Get rid of trailing whitespace
-
         tickets.each do |t|
           counter += 1
           tic.current_ticket == t.ticket_name ? add = '*' : add = ' '
           puts [add, just(counter, 4, 'r'),
                 t.ticket_id[0,6],
-<<<<<<< HEAD
                 just(t.title, cols - 56),
-=======
                 just(t.title, 25),
->>>>>>> Get rid of trailing whitespace
                 just(t.state, 5),
                 t.opened.strftime("%m/%d"),
                 just(t.assigned_name, 8),
@@ -452,36 +428,29 @@ module TicGit
         return message
       end
     end
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> Get rid of trailing whitespace
     def parse_options! #:nodoc:
       if args.empty?
-<<<<<<< HEAD
-<<<<<<< HEAD
         puts "Please specify at least one action to execute."
         puts " list state show new checkout comment tag assign points "
-=======
         warn "Please specify at least one action to execute."
         usage
->>>>>>> Clean up some code, give commands -h/--help
-=======
         warn "Please specify at least one action to execute."
         usage
->>>>>>> Outch, forgot something...
         exit
       end
 
       @action = args.first
     end
-<<<<<<< HEAD
     
     def self.window_width
       @@window_width
     end
     
+
+    def usage
+      puts COMMANDS.keys.sort.join(' ')
+    end
+
     class << self
       attr :window_lines, true
       attr :window_cols, true
@@ -504,13 +473,11 @@ module TicGit
       TicGit::CLI.window_cols
     end
     
-=======
 
     def usage
       puts COMMANDS.keys.sort.join(' ')
     end
 
->>>>>>> Get rid of trailing whitespace
     def just(value, size, side = 'l')
       value = value.to_s
       if value.size > size
@@ -525,9 +492,6 @@ module TicGit
 
   end
 end
-<<<<<<< HEAD
 
 TicGit::CLI.reset_window_width
 Signal.trap("SIGWINCH") { TicGit::CLI.reset_window_width }
-=======
->>>>>>> Get rid of trailing whitespace
