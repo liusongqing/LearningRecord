@@ -6,6 +6,21 @@ require 'set'
 
 module TicGit
   class CLI
+    COMMANDS = {
+      'assign'    => :handle_ticket_assign,
+      'attach'    => :handle_ticket_attach,
+      'checkout'  => :handle_ticket_checkout,
+      'comment'   => :handle_ticket_comment,
+      'list'      => :handle_ticket_list,
+      'milestone' => :handle_ticket_milestone,
+      'new'       => :handle_ticket_new,
+      'recent'    => :handle_ticket_recent,
+      'show'      => :handle_ticket_show,
+      'state'     => :handle_ticket_state,
+      'tag'       => :handle_ticket_tag,
+    }
+
+
     # The array of (unparsed) command-line options
     attr_reader :action, :options, :args, :tic
 
@@ -29,6 +44,7 @@ module TicGit
     end
 
     def execute!
+<<<<<<< HEAD
       case action
       when 'list'
         handle_ticket_list
@@ -54,7 +70,17 @@ module TicGit
         handle_ticket_points
       else
         puts 'not a command'
+=======
+      COMMANDS.each do |name, meth|
+        if name === action
+          return send(meth)
+        end
+>>>>>>> Clean up some code, give commands -h/--help
       end
+
+      puts 'not a command'
+      usage
+      exit
     end
 
     # tic milestone
@@ -75,6 +101,7 @@ module TicGit
         opts.on("-d MILESTONE", "--delete MILESTONE", "Remove a milestone") do |v|
           @options[:remove] = v
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -91,6 +118,7 @@ module TicGit
         opts.on("-d", "Remove this tag from the ticket") do |v|
           @options[:remove] = v
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -125,6 +153,7 @@ module TicGit
           raise ArgumentError, "File #{v} must be <= 2048 bytes" unless File.size(v) <= 2048
           @options[:file] = v
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -187,6 +216,7 @@ module TicGit
         opts.on("-c TICKET", "--checkout TICKET", "Checkout this ticket") do |v|
           @options[:checkout] = v
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -249,6 +279,7 @@ module TicGit
         opts.on("-l", "--list", "Show the saved queries") do |v|
           @options[:list] = true
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -362,6 +393,7 @@ module TicGit
         opts.on("-t TITLE", "--title TITLE", "Title to use for the name of the new ticket") do |v|
           @options[:title] = v
         end
+        opts.on('-h', '--help', 'Show this message'){ puts opts; exit }
       end.parse!
     end
 
@@ -420,8 +452,13 @@ module TicGit
 >>>>>>> Get rid of trailing whitespace
     def parse_options! #:nodoc:
       if args.empty?
+<<<<<<< HEAD
         puts "Please specify at least one action to execute."
         puts " list state show new checkout comment tag assign points "
+=======
+        warn "Please specify at least one action to execute."
+        usage
+>>>>>>> Clean up some code, give commands -h/--help
         exit
       end
 
@@ -457,6 +494,9 @@ module TicGit
     
 =======
 
+    def usage
+      puts COMMANDS.keys.sort.join(' ')
+    end
 
 >>>>>>> Get rid of trailing whitespace
     def just(value, size, side = 'l')
