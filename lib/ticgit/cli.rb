@@ -14,6 +14,7 @@ module TicGit
       'list'      => :handle_ticket_list,
       'milestone' => :handle_ticket_milestone,
       'new'       => :handle_ticket_new,
+      'points'    => :handle_ticket_points,
       'recent'    => :handle_ticket_recent,
       'show'      => :handle_ticket_show,
       'state'     => :handle_ticket_state,
@@ -45,6 +46,7 @@ module TicGit
 
     def execute!
 <<<<<<< HEAD
+<<<<<<< HEAD
       case action
       when 'list'
         handle_ticket_list
@@ -71,11 +73,16 @@ module TicGit
       else
         puts 'not a command'
 =======
+=======
+>>>>>>> Outch, forgot something...
       COMMANDS.each do |name, meth|
         if name === action
           return send(meth)
         end
+<<<<<<< HEAD
 >>>>>>> Clean up some code, give commands -h/--help
+=======
+>>>>>>> Outch, forgot something...
       end
 
       puts 'not a command'
@@ -235,7 +242,7 @@ module TicGit
       tic_id = ARGV.size > 1 ? ARGV[1].chomp : nil
       tic.ticket_assign(options[:user], tic_id)
     end
-    
+
     # Assigns points to a ticket
     #
     # Usage:
@@ -245,7 +252,7 @@ module TicGit
         tid = ARGV[1].chomp
         new_points = ARGV[2].chomp
         tic.ticket_points(new_points, tid)
-      else  
+      else
         puts 'Usage: ti points ticket_id points'
       end
     end
@@ -453,12 +460,17 @@ module TicGit
     def parse_options! #:nodoc:
       if args.empty?
 <<<<<<< HEAD
+<<<<<<< HEAD
         puts "Please specify at least one action to execute."
         puts " list state show new checkout comment tag assign points "
 =======
         warn "Please specify at least one action to execute."
         usage
 >>>>>>> Clean up some code, give commands -h/--help
+=======
+        warn "Please specify at least one action to execute."
+        usage
+>>>>>>> Outch, forgot something...
         exit
       end
 
