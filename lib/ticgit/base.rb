@@ -86,6 +86,7 @@ module TicGit
 
     # returns array of Tickets
     def ticket_list(options = {})
+      reset_ticgit
       ts = []
       @last_tickets = []
       @config['list_options'] ||= {}
