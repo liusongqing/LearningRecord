@@ -115,4 +115,5 @@ describe TicGit do
       
     end
   end
+  it "Use the 'ticgit' branch if 'ticgit-ng' isn't available (legacy support)"
 end
